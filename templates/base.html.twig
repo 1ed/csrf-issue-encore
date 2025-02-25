@@ -13,6 +13,13 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+    <a href="{{ path('app_session_start') }}">Session START</a>
+    |
+    <a href="{{ path('app_session_clear') }}">Session CLEAR</a>
+    -
+    <a href="{{ path('app_default') }}">with UX Live</a>
+    |
+    <a href="{{ path('app_form') }}">without UX Live</a>
+    {% block body %}{% endblock %}
     </body>
 </html>

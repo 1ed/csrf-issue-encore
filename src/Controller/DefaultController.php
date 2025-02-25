@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\NameType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,5 +30,17 @@ final class DefaultController extends AbstractController
         $request->getSession()->clear();
 
         return $this->redirectToRoute('app_default');
+    }
+
+    #[Route('/form', name: 'app_form')]
+    public function form(Request $request): Response
+    {
+        $form = $this->createForm(NameType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            return $this->redirectToRoute('app_form');
+        }
+
+        return $this->render('default/form.html.twig', ['form' => $form]);
     }
 }
